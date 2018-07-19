@@ -2,6 +2,8 @@
 module Fib where
 
 fib :: Int -> Int
-fib 0 = 0
-fib 1 = 1
-fib n = fib (n - 1) + fib (n - 2)
+fib n = helper 1 0 n
+
+helper :: Int -> Int -> Int -> Int
+helper b a 0 = a
+helper b a n = helper (b + a) b (n - 1)
