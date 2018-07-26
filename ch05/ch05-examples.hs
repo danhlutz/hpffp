@@ -34,3 +34,7 @@ anonNested :: Integer
            -> Integer
 anonNested = 
   \i -> \b -> i + (nonsense b)
+
+triple x = tripleItYo x
+  where tripleItYo :: Integer -> Integer
+        tripleItYo y = y * 3
