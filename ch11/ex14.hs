@@ -59,12 +59,22 @@ fingerTaps :: [(Digit, Presses)] -> Presses
 fingerTaps xs = foldr (+) 0 (map getPresses xs)
 
 -- 4)
+mostPopular:: Eq a => [a] -> a
+mostPopular f@(x:xs) = go x (occurences x f) xs
+  where go tmpMax _ [] = tmpMax
+        go tmpMax count (y:ys)
+           | count < (occurences y f) = go y (occurences y f) ys
+           | otherwise = go tmpMax count ys
+
 mostPopularLetter :: String -> Char
-mostPopularLetter msg@(x:xs) = go x (occurences x xs) xs
+mostPopularLetter msg@(x:xs) = go x (occurences x msg) xs
   where go tmpMax _ [] = tmpMax
         go tmpMax count (y:ys)
            | count < (occurences y msg) = go y (occurences y msg) ys
            | otherwise = go tmpMax count ys
+
+mostPopularLetter' :: String -> Char
+mostPopularLetter' msg = mostPopular msg
 
 occurences :: Eq a => a -> [a] -> Int
 occurences x [] = 0
@@ -97,3 +107,6 @@ coolestWord msgs = go first count ms
         go tmpMax count (y:ys)
            | count < (occurences y ms) = go y (occurences y ms) ys
            | otherwise = go tmpMax count ys
+
+coolestWord' :: [String] -> String
+coolestWord' msgs = mostPopular (words (concat msgs))
