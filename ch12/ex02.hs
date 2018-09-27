@@ -40,3 +40,15 @@ countVowels (w:ws)
 
 isVowel :: Char -> Bool
 isVowel x = elem x "aAeEiIoOuU"
+
+-- 3)
+vowel :: Char -> Maybe Char
+vowel x
+  | elem x "aeiouAEIOU" = Just x
+  | otherwise = Nothing
+
+countVowels' :: String -> Integer
+countVowels' "" = 0
+countVowels' (x:xs)
+  | vowel x == Nothing = countVowels' xs
+  | otherwise          = 1 + countVowels' xs
