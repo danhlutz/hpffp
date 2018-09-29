@@ -26,3 +26,10 @@ getThird (_, _, x) = x
 treeBuild :: Integer -> BinaryTree Integer
 treeBuild 0 = Leaf
 treeBuild x = Node (treeBuild (x - 1)) x (treeBuild (x - 1))
+
+treeBuild' :: Integer -> BinaryTree Integer
+treeBuild' x = go 0 x
+  where go i f
+          | i == f = Node Leaf f Leaf
+          | f < 0  = Node (go (i - 1) f) i (go (i - 1) f)
+          | otherwise = Node (go (i + 1) f) i (go (i + 1) f)
