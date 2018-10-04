@@ -50,31 +50,31 @@ randomWord' = gameWords >>= randomWord
 
 -- gameplay
 data Puzzle =
-  Puzzle String [Maybe Char] [Char]
+  Puzzle String [Maybe Char] [Char] Int
 
 instance Show Puzzle where
-  show (Puzzle _ discovered guessed) =
+  show (Puzzle _ discovered guessed _) =
       (intersperse ' ' $
        fmap renderPuzzleChar discovered)
       ++ " Guessed so far: " ++ guessed
 
 freshPuzzle :: String -> Puzzle
 freshPuzzle s =
-  Puzzle s (map (\ x -> Nothing) s) []
+  Puzzle s (map (\ x -> Nothing) s) [] 0
 
 charInWord :: Puzzle -> Char -> Bool
-charInWord (Puzzle s _ _) x = elem x s
+charInWord (Puzzle s _ _ _) x = elem x s
 
 alreadyGuessed :: Puzzle -> Char -> Bool
-alreadyGuessed (Puzzle _ _ g) x = elem x g
+alreadyGuessed (Puzzle _ _ g _) x = elem x g
 
 renderPuzzleChar :: Maybe Char -> Char
 renderPuzzleChar Nothing = '_'
 renderPuzzleChar (Just c) = c
 
 fillInCharacter :: Puzzle -> Char -> Puzzle
-fillInCharacter (Puzzle word filledInSoFar s) c =
-  Puzzle word newFilledInSoFar (c : s)
+fillInCharacter (Puzzle word filledInSoFar s i) c =
+  Puzzle word newFilledInSoFar (c : s) i
   where zipper guessed wordChar guessChar =
           if wordChar == guessed
           then Just wordChar
@@ -101,11 +101,11 @@ handleGuess puzzle guess = do
     (False, _) -> do
       putStrLn "This character wasn't in\
               \ the word, try again."
-      return (fillInCharacter puzzle guess)
+      return (incGuesses (fillInCharacter puzzle guess))
 
 gameOver :: Puzzle -> IO ()
-gameOver (Puzzle wordToGuess _ guessed) =
-  if (length guessed) > 7 then
+gameOver (Puzzle wordToGuess _ _ badGuesses) =
+  if badGuesses > 7 then
     do putStrLn "You lose!"
        putStrLn $
          "The word was " ++ wordToGuess
@@ -113,7 +113,7 @@ gameOver (Puzzle wordToGuess _ guessed) =
   else return ()
 
 gameWin :: Puzzle -> IO ()
-gameWin (Puzzle _ filledInSoFar _) =
+gameWin (Puzzle _ filledInSoFar _ _) =
   if all isJust filledInSoFar then
     do putStrLn "You win!"
        exitSuccess
@@ -132,3 +132,6 @@ runGame puzzle = forever $ do
     _   -> 
       putStrLn "Your guess must\
               \ be a single character"
+
+incGuesses :: Puzzle -> Puzzle
+incGuesses (Puzzle a b c i) = Puzzle a b c (i + 1)
