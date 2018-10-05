@@ -1,0 +1,27 @@
+name:                cipher
+version:             0.1.0.0
+synopsis:            A user interface for a vigenere cipher
+-- description:
+homepage:            https://github.com/danhlutz/
+license:             BSD3
+license-file:        LICENSE
+author:              Dan Lutz
+maintainer:          danhlutz@gmail.com
+copyright:           2018 Dan Lutz
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+executable cipher
+  hs-source-dirs:      exe
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , cipher
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Cipher
+  build-depends:       base >= 4.7 && < 5
+  default-language:    Haskell2010
