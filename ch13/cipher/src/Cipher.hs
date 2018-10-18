@@ -26,8 +26,12 @@ vigenere a b = caesar a (ord b)
 unVigenere :: Char -> Char -> Char
 unVigenere a b = unCaesar a (ord b)
 
+defaultKey :: String
+defaultKey = "thisismyfunplace"
+
 encodeVig :: String -> String -> String
 encodeVig "" _ = ""
+encodeVig x "" = encodeVig x defaultKey
 encodeVig (x:xs) (w:ws)
   | x == ' '  = ' ' : (encodeVig xs (w:ws))
   | otherwise = 
@@ -36,6 +40,7 @@ encodeVig (x:xs) (w:ws)
 
 decodeVig :: String -> String -> String
 decodeVig "" _ = ""
+decodeVig x "" = decodeVig x defaultKey
 decodeVig (x:xs) (w:ws)
   | x == ' ' = ' ' : (decodeVig xs (w:ws))
   | otherwise =

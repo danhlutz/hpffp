@@ -25,3 +25,13 @@ library
   exposed-modules:     Cipher
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
+
+test-suite tests
+  ghc-options:         -Wall -fno-warn-orphans
+  type:                exitcode-stdio-1.0
+  main-is:             tests.hs
+  hs-source-dirs:      tests
+  build-depends:       base >= 4.7 && < 5
+                     , cipher
+                     , QuickCheck
+  default-language:    Haskell2010
