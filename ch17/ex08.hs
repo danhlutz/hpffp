@@ -142,7 +142,7 @@ instance (Monoid a, Monoid b, Monoid c) =>
          Applicative (Four a b c) where
   pure x = Four mempty mempty mempty x
   (<*>) (Four h i j f) (Four m n o p) =
-    Four (mappend h m) (mappend i n) (mappend j o) (f p)
+    fmap f $ Four (mappend h m) (mappend i n) (mappend j o) p
 
 instance (Arbitrary a, Arbitrary b, Arbitrary c, Arbitrary d)=>
          Arbitrary (Four a b c d) where
