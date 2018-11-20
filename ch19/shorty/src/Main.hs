@@ -28,12 +28,18 @@ shortyGen :: IO [Char]
 shortyGen =
   replicateM 7 (randomElement alphaNum)
 
-saveURI :: R.Connection
+saveURI :: R.Connection 
         -> BC.ByteString
         -> BC.ByteString
         -> IO (Either R.Reply R.Status)
-saveURI conn shortURI uri =
-  R.runRedis conn $ R.set shortURI uri
+saveURI conn shortURI uri = do
+  try <- liftIO (getURI conn shortURI)
+  short <- liftIO shortyGen
+  let new = BC.pack short
+  case try of
+    Left _ -> saveURI conn new uri
+    Right (Just _) -> saveURI conn new uri
+    Right Nothing -> R.runRedis conn $ R.set shortURI uri
 
 getURI :: R.Connection
        -> BC.ByteString
