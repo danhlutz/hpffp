@@ -1,0 +1,26 @@
+name:                shorty
+version:             0.1.0.0
+synopsis:            URI shortener
+homepage:            https://github.com/danhlutz/hpffp
+license:             BSD3
+license-file:        LICENSE
+author:              Dan Lutz, from HPFFP
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable shorty
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  ghc-options:         -threaded
+  build-depends:       base >= 4.7 && < 5
+                     , bytestring
+                     , hedis
+                     , mtl
+                     , network-uri
+                     , random
+                     , scotty
+                     , semigroups
+                     , text
+                     , transformers
+  default-language:    Haskell2010
