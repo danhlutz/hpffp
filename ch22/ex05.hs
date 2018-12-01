@@ -33,12 +33,12 @@ instance Monad (Reader r) where
 
 getDog :: Reader Person Dog
 getDog = do
-  dog <- Reader $ \p -> dogName p
-  address' <- Reader $ \p -> address p
+  dog <- Reader dogName
+  address' <- Reader address
   return $ Dog dog address'
 
 getDog' :: Person -> Dog
-getDog' p = (runReader getDog) p
+getDog' = (runReader getDog)
 
 --
 
