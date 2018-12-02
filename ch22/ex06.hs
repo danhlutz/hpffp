@@ -43,16 +43,28 @@ x3 :: Integer -> (Maybe Integer, Maybe Integer)
 x3 n = (,) (z' n) (z' n)
 
 uncurry :: (a -> b -> c) -> (a, b) -> c
-uncurry f m = f (fst m) (snd m)
+uncurry f = do
+  x' <- fst
+  y' <- snd
+  return $ f x' y'
 
 summed :: Num c => (c, c) -> c
-summed m = (+) (fst m) (snd m)
+summed = do
+  x' <- fst
+  y' <- snd
+  return $ (+) x' y'
 
 s' :: Maybe Integer
 s' = summed <$> ((,) <$> xs <*> ys)
 
 bolt :: Integer -> Bool
 bolt = (&&) <$>  (>3) <*> (<8)
+
+bolt' :: Integer -> Bool
+bolt' = do
+  x' <- (>3)
+  y' <- (<8)
+  return $ x' && y'
 
 sequA :: Integral a => a -> [Bool]
 sequA m = sequenceA [(>3), (<8), even] m
