@@ -144,18 +144,18 @@ randomElem s = do
 findPattern :: Game -> Maybe Int
 findPattern g =
   let plays = (playerHistory g)
-  in case (length plays) > 3 of
+  in case (length plays) > 2 of
     False -> Nothing
-    True  -> scanForPattern (take 3 plays) plays
+    True  -> scanForPattern (take 2 plays) plays
 
 scanForPattern :: [Int] -> [Int] -> Maybe Int
 scanForPattern _ [] = Nothing
 scanForPattern plays (h:hs) =
-  case (length hs) < 3 of
+  case (length hs) < 2 of
     True -> Nothing
     False ->
       let playBools = map even plays
-          lastThree = map even (take 3 hs)
+          lastThree = map even (take 2 hs)
       in if playBools == lastThree
          then Just h
          else scanForPattern plays hs
