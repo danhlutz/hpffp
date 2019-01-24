@@ -1,0 +1,124 @@
+	Thu Jan 24 17:44 2019 Time and Allocation Profiling Report  (Final)
+
+	   str02 +RTS -P -RTS
+
+	total time  =      177.66 secs   (177655 ticks @ 1000 us, 1 processor)
+	total alloc = 52,012,228,056 bytes  (excludes profiling overheads)
+
+COST CENTRE             MODULE                SRC                                       %time %alloc  ticks     bytes
+
+writeLines.outer.commit Data.Text.IO          Data/Text/IO.hs:222:5-35                   81.0   37.1  143860 19290718800
+writeLines.outer.inner  Data.Text.IO          Data/Text/IO.hs:(209,5)-(221,61)            5.8    0.0  10272   1462800
+main                    Main                  strings/str02.hs:(25,1)-(28,48)             4.0   20.2   7110 10531338344
+hPutStr.str             Data.Text.IO          Data/Text/IO.hs:178:7-20                    3.1   26.9   5523 13967261600
+unpack.go               Data.Text.Internal.IO Data/Text/Internal/IO.hs:(98,3)-(102,47)    3.1    1.0   5430 527853600
+dictWords               Main                  strings/str02.hs:(13,1)-(14,38)             1.0    9.7   1737 5030349744
+writeLines.outer        Data.Text.IO          Data/Text/IO.hs:(207,3)-(222,35)            0.5    4.4    971 2271332000
+
+
+                                                                                                                                     individual      inherited
+COST CENTRE                           MODULE                          SRC                                        no.      entries  %time %alloc   %time %alloc  ticks     bytes
+
+MAIN                                  MAIN                            <built-in>                                  560          0    0.0    0.0   100.0  100.0      0      4392
+ CAF                                  Main                            <entire-module>                            1119          0    0.0    0.0     0.0    0.0      0      1560
+  dictWords                           Main                            strings/str02.hs:(13,1)-(14,38)            1122          1    0.0    0.0     0.0    0.0      0         0
+  dictWordsT                          Main                            strings/str02.hs:(17,1)-(18,38)            1124          1    0.0    0.0     0.0    0.0      0        16
+   readFile                           Data.Text.IO                    Data/Text/IO.hs:87:1-55                    1125          1    0.0    0.0     0.0    0.0      0         0
+  dictWordsTL                         Main                            strings/str02.hs:(21,1)-(22,39)            1173          1    0.0    0.0     0.0    0.0      0        16
+   readFile                           Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:81:1-55               1174          1    0.0    0.0     0.0    0.0      0         0
+  main                                Main                            strings/str02.hs:(25,1)-(28,48)            1120          1    0.0    0.0     0.0    0.0      0         0
+ CAF                                  GHC.Conc.Signal                 <entire-module>                             657          0    0.0    0.0     0.0    0.0      0       640
+ CAF                                  GHC.IO.Encoding                 <entire-module>                             639          0    0.0    0.0     0.0    0.0      0      3296
+ CAF                                  GHC.IO.Encoding.Iconv           <entire-module>                             637          0    0.0    0.0     0.0    0.0      0       200
+ CAF                                  GHC.IO.Exception                <entire-module>                             631          0    0.0    0.0     0.0    0.0      0       472
+ CAF                                  GHC.IO.FD                       <entire-module>                             630          0    0.0    0.0     0.0    0.0      0        16
+ CAF                                  GHC.IO.Handle.FD                <entire-module>                             628          0    0.0    0.0     0.0    0.0      0     34672
+ CAF                                  GHC.IO.Handle.Internals         <entire-module>                             627          0    0.0    0.0     0.0    0.0      0        24
+ CAF                                  GHC.IO.Handle.Text              <entire-module>                             626          0    0.0    0.0     0.0    0.0      0        88
+ CAF                                  System.Posix.Internals          <entire-module>                             596          0    0.0    0.0     0.0    0.0      0        16
+ CAF:empty                            Data.Text.Array                 Data/Text/Array.hs:176:1-5                 1049          0    0.0    0.0     0.0    0.0      0         0
+  empty                               Data.Text.Array                 Data/Text/Array.hs:176:1-38                1142          1    0.0    0.0     0.0    0.0      0        32
+   shiftL                             Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:60:5-50 1143          1    0.0    0.0     0.0    0.0      0         0
+   shiftR                             Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:63:5-51 1144          1    0.0    0.0     0.0    0.0      0         0
+ CAF:empty                            Data.Text.Internal              Data/Text/Internal.hs:82:1-5                941          0    0.0    0.0     0.0    0.0      0        48
+ CAF:putStrLn1                        Data.Text.IO                    <no location info>                          969          0    0.0    0.0     0.0    0.0      0         0
+  putStrLn                            Data.Text.IO                    Data/Text/IO.hs:307:1-27                   1145          1    0.0    0.0     0.0    0.0      0        32
+ CAF:putStrLn1                        Data.Text.Lazy.IO               <no location info>                          734          0    0.0    0.0     0.0    0.0      0         0
+  putStrLn                            Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:165:1-27              1181          1    0.0    0.0     0.0    0.0      0        32
+ main                                 Main                            strings/str02.hs:(25,1)-(28,48)            1121          0    4.0   20.2   100.0  100.0   7110 10531338344
+  dictWords                           Main                            strings/str02.hs:(13,1)-(14,38)            1123          0    1.0    9.7     1.0    9.7   1737 5030349744
+  dictWordsT                          Main                            strings/str02.hs:(17,1)-(18,38)            1126          0    0.0    0.0     1.7    1.1      0         0
+   readFile                           Data.Text.IO                    Data/Text/IO.hs:87:1-55                    1127          0    0.0    0.0     1.7    1.1      7    952800
+    hGetContents                      Data.Text.IO                    Data/Text/IO.hs:(134,1)-(147,50)           1128         50    0.0    0.0     1.7    1.1      1      7600
+     chooseGoodBuffering              Data.Text.IO                    Data/Text/IO.hs:(155,1)-(164,18)           1129         50    0.0    0.0     0.0    0.0      1     79200
+     hGetContents.readAll             Data.Text.IO                    Data/Text/IO.hs:(138,3)-(147,50)           1130         50    0.0    0.0     1.7    1.1      2     30000
+      concat                          Data.Text                       Data/Text.hs:(978,1)-(990,36)              1152         50    0.0    0.0     0.0    0.5      1      3200
+       concat.go                      Data.Text                       Data/Text.hs:(986,5)-(990,36)              1158         50    0.0    0.0     0.0    0.0      0         0
+       concat.len                     Data.Text                       Data/Text.hs:984:5-48                      1154         50    0.0    0.0     0.0    0.0      3   6333600
+        sumP                          Data.Text                       Data/Text.hs:(1849,1)-(1854,27)            1155         50    0.0    0.0     0.0    0.0      0       800
+         sumP.go                      Data.Text                       Data/Text.hs:(1850,9)-(1854,27)            1156      60950    0.0    0.0     0.0    0.0      3    974400
+          sumP.go.ax                  Data.Text                       Data/Text.hs:1853:17-26                    1157      60900    0.0    0.0     0.0    0.0      0         0
+       concat.ts'                     Data.Text                       Data/Text.hs:983:5-34                      1153         50    0.0    0.0     0.0    0.0      1   3410400
+       run                            Data.Text.Array                 Data/Text/Array.hs:181:1-34                1159         50    0.0    0.0     0.0    0.5      0       800
+        concat.go                     Data.Text                       Data/Text.hs:(986,5)-(990,36)              1160          0    0.0    0.5     0.0    0.5      2 249312800
+         concat.go.step               Data.Text                       Data/Text.hs:(988,11)-(989,61)             1163      60900    0.0    0.0     0.0    0.0     47   3897600
+          aBA                         Data.Text.Array                 Data/Text/Array.hs:85:7-9                  1165      60900    0.0    0.0     0.0    0.0      0         0
+          concat.go.step.j            Data.Text                       Data/Text.hs:989:17-26                     1164      60900    0.0    0.0     0.0    0.0      0         0
+          maBA                        Data.Text.Array                 Data/Text/Array.hs:95:7-10                 1166      60900    0.0    0.0     0.0    0.0      0         0
+         shiftL                       Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:60:5-50 1161         50    0.0    0.0     0.0    0.0      0         0
+         shiftR                       Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:63:5-51 1162         50    0.0    0.0     0.0    0.0      0         0
+      hGetContents.readAll.readChunks Data.Text.IO                    Data/Text/IO.hs:(139,9)-(144,39)           1131         50    0.0    0.0     1.6    0.6      4   4876000
+       readChunk                      Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(156,1)-(163,10)  1132      60950    0.0    0.0     1.6    0.6      9   5848400
+        getSomeCharacters             Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(130,1)-(151,52)  1133      60950    0.0    0.0     0.2    0.0      1         0
+         readTextDevice               Data.Text.Internal.IO           Data/Text/Internal/IO.hs:133:39-64         1134      60950    0.2    0.0     0.2    0.0    438  25108400
+          catchError                  Data.Text.IO                    Data/Text/IO.hs:(99,1)-(105,57)            1141         50    0.0    0.0     0.0    0.0      0      2016
+        unpack                        Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(93,1)-(102,47)   1135      60900    0.0    0.0     1.4    0.5      0   2436000
+         unpack.go                    Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(98,3)-(102,47)   1136      60900    1.0    0.5     1.4    0.5   1861 263926800
+          unpack.go.next              Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(100,5)-(101,44)  1139  124716350    0.3    0.0     0.3    0.0    545         0
+           unpack.go.ix               Data.Text.Internal.IO           Data/Text/Internal/IO.hs:102:5-47          1140  124655450    0.0    0.0     0.0    0.0     39         0
+          shiftL                      Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:60:5-50 1137      60900    0.0    0.0     0.0    0.0      0         0
+          shiftR                      Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:63:5-51 1138      60900    0.0    0.0     0.0    0.0      0         0
+  dictWordsTL                         Main                            strings/str02.hs:(21,1)-(22,39)            1175          0    0.0    0.0     2.9    0.6      0         0
+   readFile                           Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:81:1-55               1176          0    0.0    0.0     2.9    0.6      4    948800
+    hGetContents                      Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:(95,1)-(99,44)        1177         50    0.0    0.0     2.9    0.6      0      8800
+     chooseGoodBuffering              Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:(104,1)-(107,49)      1178         50    0.0    0.0     0.0    0.0      0     21200
+     hGetContents.\                   Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:(97,48)-(99,44)       1179         50    0.0    0.0     2.9    0.6      0      9200
+      lazyRead                        Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:(110,1)-(117,65)      1180      60950    0.0    0.0     2.9    0.6     49   8776800
+       lazyRead.\                     Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:(111,40)-(117,65)     1186      60950    0.0    0.0     2.8    0.6      6   1950400
+        lazyReadBuffered              Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:(120,1)-(130,61)      1187      60950    0.0    0.0     2.8    0.6     30   9747200
+         readChunk                    Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(156,1)-(163,10)  1188      60950    0.0    0.0     2.8    0.6     26   5848400
+          getSomeCharacters           Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(130,1)-(151,52)  1189      60950    0.0    0.0     0.4    0.0      3         0
+           readTextDevice             Data.Text.Internal.IO           Data/Text/Internal/IO.hs:133:39-64         1190      60950    0.4    0.0     0.4    0.0    672  25110400
+            lazyReadBuffered.\        Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:(124,49)-(130,61)     1207         50    0.0    0.0     0.0    0.0      1     16800
+          unpack                      Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(93,1)-(102,47)   1191      60900    0.0    0.0     2.4    0.5     15   2436000
+           unpack.go                  Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(98,3)-(102,47)   1192      60900    2.0    0.5     2.4    0.5   3569 263926800
+            unpack.go.next            Data.Text.Internal.IO           Data/Text/Internal/IO.hs:(100,5)-(101,44)  1195  124716350    0.4    0.0     0.4    0.0    699         0
+             unpack.go.ix             Data.Text.Internal.IO           Data/Text/Internal/IO.hs:102:5-47          1196  124655450    0.0    0.0     0.0    0.0     26         0
+            shiftL                    Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:60:5-50 1193      60900    0.0    0.0     0.0    0.0      0         0
+            shiftR                    Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:63:5-51 1194      60900    0.0    0.0     0.0    0.0      0         0
+  putStrLn                            Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:165:1-27              1182          0    0.0    0.0    45.3   34.3      0      1200
+   hPutStrLn                          Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:142:1-46              1183         50    0.0    0.0    45.3   34.3      0     36400
+    hPutStr                           Data.Text.Lazy.IO               Data/Text/Lazy/IO.hs:138:1-44              1184         50    0.0    0.0    45.3   34.3     28   1465200
+     hPutStr                          Data.Text.IO                    Data/Text/IO.hs:(173,1)-(184,56)           1197      60900    0.0    0.0    45.3   34.3     40  10718400
+      hPutStr.\                       Data.Text.IO                    Data/Text/IO.hs:(175,48)-(177,50)          1198      60900    0.0    0.0     0.0    0.0     15   2923200
+       getSpareBuffer                 Data.Text.IO                    Data/Text/IO.hs:(256,1)-(271,38)           1199      60900    0.0    0.0     0.0    0.0     18   8769600
+      hPutStr.str                     Data.Text.IO                    Data/Text/IO.hs:178:7-20                   1200      60900    0.0    0.0     0.0    0.0      4   5846400
+       shiftR                         Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:63:5-51 1201      60900    0.0    0.0     0.0    0.0      0         0
+      writeLines                      Data.Text.IO                    Data/Text/IO.hs:(205,1)-(222,35)           1202      60900    0.0    0.0    45.2   34.2      8   4872000
+       writeLines.outer               Data.Text.IO                    Data/Text/IO.hs:(207,3)-(222,35)           1203   11855200    0.3    2.2    45.2   34.2    481 1139073600
+        writeLines.outer.inner        Data.Text.IO                    Data/Text/IO.hs:(209,5)-(221,61)           1204  124716350    3.0    0.0    45.0   32.0   5329   1461600
+         writeLines.outer.commit      Data.Text.IO                    Data/Text/IO.hs:222:5-35                   1206   11855200   40.5   18.6    40.5   18.6  71918 9666535200
+         hPutStr.str                  Data.Text.IO                    Data/Text/IO.hs:178:7-20                   1205          0    1.5   13.4     1.5   13.4   2646 6980705200
+     toChunks                         Data.Text.Lazy                  Data/Text/Lazy.hs:473:1-35                 1185         50    0.0    0.0     0.0    0.0      7   4872000
+  putStrLn                            Data.Text.IO                    Data/Text/IO.hs:307:1-27                   1146          0    0.0    0.0    45.2   34.1      0      1200
+   hPutStrLn                          Data.Text.IO                    Data/Text/IO.hs:284:1-46                   1147         50    0.0    0.0    45.2   34.1      0     36000
+    hPutStr                           Data.Text.IO                    Data/Text/IO.hs:(173,1)-(184,56)           1148         50    0.0    0.0    45.2   34.1      1      8800
+     hPutStr.\                        Data.Text.IO                    Data/Text/IO.hs:(175,48)-(177,50)          1149         50    0.0    0.0     0.0    0.0      0      2400
+      getSpareBuffer                  Data.Text.IO                    Data/Text/IO.hs:(256,1)-(271,38)           1150         50    0.0    0.0     0.0    0.0      0      7200
+     hPutStr.str                      Data.Text.IO                    Data/Text/IO.hs:178:7-20                   1151         50    0.0    0.0     0.0    0.0      0      4800
+      shiftR                          Data.Text.Internal.Unsafe.Shift Data/Text/Internal/Unsafe/Shift.hs:63:5-51 1167         50    0.0    0.0     0.0    0.0      0         0
+     writeLines                       Data.Text.IO                    Data/Text/IO.hs:(205,1)-(222,35)           1168         50    0.0    0.0    45.2   34.1      0      4000
+      writeLines.outer                Data.Text.IO                    Data/Text/IO.hs:(207,3)-(222,35)           1169   11794350    0.3    2.2    45.2   34.1    490 1132258400
+       writeLines.outer.inner         Data.Text.IO                    Data/Text/IO.hs:(209,5)-(221,61)           1170  124655500    2.8    0.0    44.9   31.9   4943      1200
+        writeLines.outer.commit       Data.Text.IO                    Data/Text/IO.hs:222:5-35                   1172   11794350   40.5   18.5    40.5   18.5  71942 9624183600
+        hPutStr.str                   Data.Text.IO                    Data/Text/IO.hs:178:7-20                   1171          0    1.6   13.4     1.6   13.4   2873 6980705200
