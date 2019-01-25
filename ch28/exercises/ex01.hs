@@ -30,7 +30,7 @@ snoc (DL xs) x = DL $ \xs' -> (xs [x]) ++ xs'
 
 append :: DList a -> DList a -> DList a
 append (DL xs) (DL ys) =
-  DL $ \zs -> (xs []) ++ (ys zs)
+  DL $ xs . ys
 {-# INLINE append #-}
 
 schlemiel :: Int -> [Int]
