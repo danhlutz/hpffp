@@ -97,7 +97,10 @@ isIni (_:xs) = isIni xs
 getIniFiles :: FilePath -> IO [FilePath]
 getIniFiles d = do
   files <- listDirectory d
-  return $ filter isIni files
+  let iniFiles = filter isIni files
+  case d of
+    "." -> return iniFiles
+    _   -> return $ fmap (d++) iniFiles
 
 addConfigs :: FilePath -> IO ConfigMap
 addConfigs fp = do
